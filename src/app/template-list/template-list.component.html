@@ -1,0 +1,93 @@
+<div class="p-5">
+  <div class="d-flex mb-5 justify-content-between align-items-center">
+    <form>
+      <div class="mb-3 row">
+        <label
+          for="table-filtering-search"
+          class="col-xs-3 col-sm-auto col-form-label"
+          >Search Template:</label
+        >
+        <div class="col-xs-3 col-sm-auto">
+          <input
+            id="table-filtering-search"
+            class="form-control"
+            type="text"
+            [formControl]="filter"
+            (keyup)="searchData($event)"
+          />
+        </div>
+      </div>
+    </form>
+
+    <button class="btn btn-lg btn-outline-primary" (click)="openModalWithData(data)">
+      Create Template
+    </button>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S.No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Created</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr *ngFor="let item of filteredData">
+      <td routerLink="/templates/{{item.id}}">
+          {{item.id}}
+      </td>
+      <td routerLink="/templates/{{item.id}}">
+        <ngb-highlight
+          [result]="item.title"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td routerLink="/templates/{{item.id}}">
+          {{item.description}}
+      </td>
+      <td routerLink="/templates/{{item.id}}">
+          {{item.category}}
+      </td>
+      <td routerLink="/templates/{{item.id}}">
+          {{item.prompt}}
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteTemplate(item.id)"
+        >
+        <i class="fas fa-trash"></i> Delete
+        </button>
+      </td>
+    </tr> -->
+      <tr
+        *ngFor="let item of filteredData"
+        [routerLink]="'/templates/' + item.id"
+      >
+        <td>{{ item.id }}</td>
+        <td>
+          <ngb-highlight
+            [result]="item.title"
+            [term]="filter.value"
+          ></ngb-highlight>
+        </td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.category }}</td>
+        <td>{{ item.prompt }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteTemplate($event, item.id)"
+          >
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
